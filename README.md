@@ -1,4 +1,4 @@
-# MongoBatch
+# MongoBatch [![Build Status](https://travis-ci.org/altmetric/mongo_batch.svg?branch=master)](https://travis-ci.org/altmetric/mongo_batch)
 
 A Ruby library to run Mongoid queries on large collections in batches.
 
