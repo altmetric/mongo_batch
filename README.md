@@ -6,6 +6,18 @@ A Ruby library to run Mongoid queries on large collections in batches.
 
 **Supported Mongoid versions:** 4.0, 5.0
 
+## Installation
+
+```
+gem install mongo_batch -v '~> 0.1'
+```
+
+Or, in your `Gemfile`:
+
+```ruby
+gem 'mongo_batch', '~> 0.1'
+```
+
 ## Usage
 
 Extend your Mongoid models with `MongoBatch` to be able to call
