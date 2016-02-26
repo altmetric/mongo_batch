@@ -2,8 +2,7 @@
 
 A Ruby library to run Mongoid queries on large collections in batches.
 
-**Supported Ruby versions:** 2.1, 2.2
-
+**Supported Ruby versions:** 2.1, 2.2  
 **Supported Mongoid versions:** 4.0, 5.0
 
 ## Installation
