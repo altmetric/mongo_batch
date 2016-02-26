@@ -15,15 +15,23 @@ module MongoBatch
         processed_so_far = offset
 
         offset.step(by: batch_size, to: to - batch_size).each do |offset|
-          yielder << query.order_by(order_by).limit(batch_size).skip(offset)
+          yielder << with_order.limit(batch_size).skip(offset)
           processed_so_far += batch_size
         end
 
         if processed_so_far < to
           last_limit = to - processed_so_far
-          yielder << query.order(order_by).limit(last_limit).skip(processed_so_far)
+          yielder << with_order.limit(last_limit).skip(processed_so_far)
         end
       end
+    end
+
+    def with_order
+      options.sort ? query : query.order_by(order_by)
+    end
+
+    def options
+      query.criteria.options
     end
   end
 

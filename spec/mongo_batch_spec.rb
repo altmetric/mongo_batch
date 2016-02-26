@@ -8,6 +8,7 @@ describe MongoBatch do
     extend MongoBatch
 
     field :body, type: String
+    field :index, type: Integer
   end
 
   describe '#find_in_batches' do
@@ -83,6 +84,16 @@ describe MongoBatch do
             .map(&:id)
 
       expect(ids).to eq(posts.map(&:id).reverse)
+    end
+
+    it 'does not enforce an order if one is already applied' do
+      posts = 1.upto(10).map { |n| FactoryGirl.create(:post, index: n) }
+
+      posts_in_batches = described_class
+                         .in_batches(Post.desc(:index), batch_size: 5)
+                         .map(&:to_a)
+
+      expect(posts_in_batches).to eq([posts[5..9].reverse, posts[0..4].reverse])
     end
 
     it 'preserves any scopes previously applied' do
